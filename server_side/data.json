@@ -1,0 +1,19 @@
+[
+    {
+        "country_name": "Norway",
+        "rank": 1,
+        "values": [
+            [2021,88],
+            [2020,80]
+        ]
+    },
+
+    {
+        "country_name": "Iran",
+        "rank": 100,
+        "values": [
+            [2021,0],
+            [2020,0]
+        ]
+    }
+]
