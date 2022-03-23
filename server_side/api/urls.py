@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
+from .views import Get_data
 
 urlpatterns = [
-    path('get-data/', views.get_data)
+    path('get-data/', Get_data.as_view())
 ]

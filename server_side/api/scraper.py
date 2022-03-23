@@ -16,9 +16,11 @@ def get_corruption_data():
     for row in table_rows[2:]:
         tds = row.find_all("td")
         values = []
+        i = 0
         for td in tds[2: :2]:
-            value = [td_num(td), 2020]
+            value = [td_num(td), years[i]]
             values.append(value)
+            i = i+1
         
         item = {
             "country_name": row.find_all("td")[1].find("a").text,
@@ -27,7 +29,7 @@ def get_corruption_data():
         }
         required_data.append(item)
 
-    print(required_data)
+    return required_data
 
 
 def td_num(td):
