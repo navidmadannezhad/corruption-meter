@@ -23,8 +23,9 @@ def get_corruption_data():
             i = i+1
         
         item = {
-            "country_name": row.find_all("td")[1].find("a").text,
+            "name": row.find_all("td")[1].find("a").text,
             "rank": row.find_all("td")[0].text,
+            "link": "https://en.wikipedia.org"+row.find_all("td")[1].find("a").get("href"),
             "values":values
         }
         required_data.append(item)
@@ -42,6 +43,3 @@ def filter_list(element_list):
         if str(item).isspace():
             element_list.remove(item)
     return element_list
-
-
-get_corruption_data()
