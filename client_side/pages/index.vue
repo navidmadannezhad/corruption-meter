@@ -16,13 +16,14 @@ export default {
     return {
       options: {
         noWrap: true,
-        bounds: [
+        continuousWorld: false,
+        maxBounds: [
           [-90, -180],
           [90, 180]
         ],
-        minZoom: 2,
-        maxZoom: 3,
-      }
+        minZoom: 3,
+        maxZoom: 5,
+      },
     }
   }
 }
