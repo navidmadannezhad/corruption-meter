@@ -3,7 +3,7 @@
     <client-only>
       <l-map :zoom=13 :center="[55.9464418,8.1277591]" :options="options">
         <l-tile-layer url="https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmF2aWRtbnpoMTExIiwiYSI6ImNsMTdsYTRsNzE1bHgzZGthMWppNTdscTkifQ.cimHgKp_fzMY5v5roiDaOA"></l-tile-layer>
-        <l-geo-json :geojson="geojson"></l-geo-json>
+        <l-geo-json :geojson="geojson" :options-style="style"></l-geo-json>
       </l-map>
     </client-only>
 </div>
@@ -11,7 +11,8 @@
 
 <script>
 import axios from "axios";
-import style from "@/utils/style";
+import fill_color from "@/utils/style";
+import { modified_geoJSON } from "@/utils/shortcuts";
 
 export default {
   name: 'IndexPage',
@@ -33,6 +34,18 @@ export default {
   },
 
   methods: {
+    get_data(){
+      axios.all([this.get_geoJSON_data(), this.get_corruption_data()])
+
+      .then(axios.spread(
+        (res1, res2) => {
+          this.geojson = modified_geoJSON(this.$store.state.corruption_data, this.$store.state.geoJSON_data);
+          console.log(this.geojson);
+        }
+      ))
+      
+    },
+
     get_corruption_data(){
       return new Promise((resolve, reject) => {
 
@@ -61,35 +74,23 @@ export default {
         }, 100)
 
       })
+    },
+
+    style(feature){
+        let rank = feature.properties.rank;
+        return {
+            fillColor: fill_color(rank),
+            opacity: 0.6,
+            color: fill_color(rank),
+            fillOpacity: 0.3
+        }
     }
-    // combine_rankData_geoJson(rankData, geoJson){
-
-    // }
-
-
-
-
-
-
-
-
-
-    // get corruption data
-    // get geoJSON data
     // give ranks to geoJSON countries
     // initialize :geoJSON and :style
   },
 
   mounted(){
-    let self = this;
-
-    axios.all([this.get_geoJSON_data(), this.get_corruption_data()])
-    .then(axios.spread(
-      (res1, res2) => {
-        console.log(this.$store.state.geoJSON_data);
-        console.log(this.$store.state.corruption_data);
-      }
-    ))
+    this.get_data();
   }
 }
 </script>
