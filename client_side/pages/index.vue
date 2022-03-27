@@ -33,19 +33,63 @@ export default {
   },
 
   methods: {
+    get_corruption_data(){
+      return new Promise((resolve, reject) => {
+
+        this.$store.dispatch("fetch_corruption_data");
+
+        let timer = setInterval(() => {
+          if(this.$store.state.corruption_data){
+            resolve("corruption data is set");
+            clearInterval(timer);
+          }
+        }, 100)
+
+      })
+    },
+
+    get_geoJSON_data(){
+      return new Promise((resolve, reject) => {
+
+        this.$store.dispatch("fetch_geoJSON_data");
+
+        let timer = setInterval(() => {
+          if(this.$store.state.geoJSON_data){
+            resolve("geo json data is set");
+            clearInterval(timer);
+          }
+        }, 100)
+
+      })
+    }
     // combine_rankData_geoJson(rankData, geoJson){
 
     // }
+
+
+
+
+
+
+
+
+
+    // get corruption data
+    // get geoJSON data
+    // give ranks to geoJSON countries
+    // initialize :geoJSON and :style
   },
 
   mounted(){
-    axios.get("countries.geojson")
-    .then(res => {
-      this.geojson = res.data;
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    let self = this;
+
+    axios.all([this.get_geoJSON_data(), this.get_corruption_data()])
+    .then(axios.spread(
+      (res1, res2) => {
+        console.log(this.$store.state.geoJSON_data);
+        console.log(this.$store.state.corruption_data);
+      }
+    ))
   }
 }
 </script>

@@ -1,4 +1,9 @@
 export default {
+
+  env: {
+    BASE_URL: "http://127.0.0.1:8000"
+  },
+
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
