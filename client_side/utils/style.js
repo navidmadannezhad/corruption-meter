@@ -6,6 +6,14 @@ let colors = {
     fucked_up: "#ee5858"
 }
 
+let messages = {
+    healthy: "I enjoy living here",
+    good: "Nice country with a little Corruption!",
+    not_bad: "Country is not healthy.",
+    bad: "Country is Corrupt!",
+    fucked_up: "Paradise of Corruption!!"
+}
+
 const fill_color = (rank) => {
     switch(true){
         case rank < 36 && rank >= 0:
@@ -26,4 +34,24 @@ const fill_color = (rank) => {
     }
 }
 
-export default fill_color;
+const modal_message = (rank) => {
+    switch(true){
+        case rank < 36 && rank >= 0:
+            return messages.healthy;
+            break;
+        case rank < 72 && rank >= 36:
+            return messages.good;
+            break;
+        case rank < 108 && rank >= 72:
+            return messages.not_bad;
+            break;
+        case rank < 144 && rank >= 108:
+            return messages.bad;
+            break;
+        case rank >= 144:
+            return messages.fucked_up;
+            break;
+    }
+}
+
+export { fill_color, modal_message };

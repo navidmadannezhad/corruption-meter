@@ -1,12 +1,13 @@
 <template>
     <div id="detail-modal">
-        <div class="tool-tip-arrow"></div>
-
-        <div class="detail-modal-content">
+        <p class="introduction">
+            Corruption-Meter!
+        </p>
+        <div class="detail-modal-content" v-if="country_details">
             <div class="country-name">{{ country_details.properties.ADMIN }}</div>
             <div class="main-details">
-                <div class="message">Country is Corrupt!</div>
-                <div class="rank">
+                <div class="message" :style="'color:'+fill_color(country_details.properties.rank)">{{ modal_message(country_details.properties.rank) }}</div>
+                <div class="rank" :style="'color:'+fill_color(country_details.properties.rank)">
                     #{{ country_details.properties.rank }}
                 </div>
             </div>
@@ -17,26 +18,32 @@
             <div class="close-button">
                 <button @click="close_modal">Close</button>
             </div>
-        </div>
-     
+        </div> 
+        <div class="select-country" v-else>
+            <p>
+                Go on and select a country!
+            </p>
+        </div>  
     </div>
 </template>
 
 <script>
 import LineChart from "~/components/LineChart.vue";
+import { modal_message, fill_color } from "@/utils/style";
 
 export default {
-
     props:{
         country_details: {
             default: null,
             type: Object
+        },
+        position:{
+            type: Array
         }
     },
 
     data(){
         return{
-
 
         }
     },
@@ -48,6 +55,14 @@ export default {
     methods:{
         close_modal(){
             this.$emit("close_modal");
+        },
+
+        modal_message(rank){
+            return modal_message(rank);
+        },
+
+        fill_color(rank){
+            return fill_color(rank);
         }
     },
 
@@ -79,19 +94,27 @@ export default {
 
 <style lang="scss" scoped>
 div#detail-modal{
+    p.introduction{
+        font-size: $font3;
+        @include flex_center_center();
+        height: 10vh;
+    }
+
+    box-shadow: 1px 0px 5px rgba(0,0,0,0.1);
+
+    & > div{
+        width: 100%;
+        height: 95vh;
+        background-color: #141414;
+        color: white;
+    }
+    div.select-country{
+        p{
+            font-size: $font1;
+        }
+    }
 
     div.detail-modal-content{
-        position: absolute;
-        color: white;
-
-        width: 400px;
-        border-radius: 35px;
-        background-color: #2c2e2e;
-
-        z-index: 9999;
-        left: 50%;
-        top: 200px;
-
         @include flex_column_start_center();
 
         & > *{

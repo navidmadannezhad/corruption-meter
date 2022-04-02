@@ -1,21 +1,23 @@
 <template>
-  <div id="map-wrap" style="height: 100vh">
+  <div class="main">
+    <Detail_modal :country_details="details" @close_modal="close_modal" style="height: 100vh; width: 20vw;"/>
+    <div id="map-wrap" style="height: 100vh; width: 80vw;">
 
-    <client-only>
-      <l-map :zoom=13 :center="[55.9464418,8.1277591]" :options="options" ref="map">
+      <client-only>
+        <l-map :zoom=13 :center="[55.9464418,8.1277591]" :options="options" ref="map">
 
-        <l-tile-layer url="https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmF2aWRtbnpoMTExIiwiYSI6ImNsMTdsYTRsNzE1bHgzZGthMWppNTdscTkifQ.cimHgKp_fzMY5v5roiDaOA"></l-tile-layer>
-        <l-geo-json :geojson="geojson" :options="geoJSON_options"></l-geo-json>
-        <Detail_modal :country_details="details" v-if="details" @close_modal="close_modal"/>
+          <l-tile-layer style="opacity: 0.5;" url="https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmF2aWRtbnpoMTExIiwiYSI6ImNsMTdsYTRsNzE1bHgzZGthMWppNTdscTkifQ.cimHgKp_fzMY5v5roiDaOA"></l-tile-layer>
+          <l-geo-json :geojson="geojson" :options="geoJSON_options"></l-geo-json>
 
-      </l-map>
-    </client-only>
-</div>
+        </l-map>
+      </client-only>
+    </div>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
-import fill_color from "@/utils/style";
+import { fill_color } from "@/utils/style";
 import { modified_geoJSON } from "@/utils/shortcuts";
 import Detail_modal from '~/components/detail_modal.vue';
 
@@ -88,7 +90,7 @@ export default {
 
     close_modal(){
       this.details = null;
-    }
+    },
 
   },
 
@@ -111,11 +113,12 @@ export default {
           layer.on({
               click: (e) => {
                 self.details = e.target.feature;
+                console.log("this "+e.clientX);
               }
           });
         }
       }
-    }
+    },
   },
 
   mounted(){
@@ -125,5 +128,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+div.main{
+  @include flex_row_between_center();
+}
 </style>
