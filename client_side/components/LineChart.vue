@@ -16,13 +16,31 @@ export default {
                 borderWidth: 1.5
             }]
         }, {
-            maintainAspectRatio: false,
-            responsive: true,
-            plugins:{
-                legend: false
-            },
+                maintainAspectRatio: false,
+                responsive: true,
+                plugins:{
+                    legend: false
+                },
+                scales:{
+                    yAxes:[
+                        {
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'CPI'
+                            }
+                        }
+                    ],
+                    xAxes:[
+                        {
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Years'
+                            }
+                        }
+                    ]
+                }
             
-        });
+            });
     }
 }
 </script>

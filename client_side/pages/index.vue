@@ -1,7 +1,7 @@
 <template>
   <div class="main">
-    <Detail_modal :country_details="details" @close_modal="close_modal" style="height: 100vh; width: 20vw;"/>
-    <div id="map-wrap" style="height: 100vh; width: 80vw;">
+    <Detail_modal :country_details="details" @close_modal="close_modal" style="height: 100vh; width: 25vw;"/>
+    <div id="map-wrap" style="height: 100vh; width: 75vw;">
 
       <client-only>
         <l-map :zoom=13 :center="[55.9464418,8.1277591]" :options="options" ref="map">

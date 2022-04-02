@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+
 $font1: 3rem;
 $font2: 2.5rem;
 $font3: 2rem;
@@ -6,13 +8,10 @@ $font5: 1rem;
 $font6: 0.8rem;
 $font7: 0.6rem;
 
-@font-face {
-	font-family: "raleway";
-	src: url('~static/fonts/Raleway-Medium.ttf') format("ttf");
-}
 
-$font_name: "raleway";
+
+$font_name: Raleway;
 
 *{
-    font-family: sans-serif;
+    font-family: $font_name;
 }
