@@ -12,7 +12,7 @@
             </div>
             <div class="graph-details">
                 <p>Corruption index change in last 10 years</p>
-                <line-chart style="margin: 10px 0px;" height="200px" :chartdata="chart_data" :options="chart_options" />
+                <line-chart style="margin: 10px 0px;" height="200px" :years="graph_years" :ranks="graph_ranks"/>
             </div>
             <div class="close-button">
                 <button @click="close_modal">Close</button>
@@ -27,30 +27,17 @@ import LineChart from "~/components/LineChart.vue";
 
 export default {
 
-    props:[
-        "country_details"
-    ],
+    props:{
+        country_details: {
+            default: null,
+            type: Object
+        }
+    },
 
     data(){
         return{
-            chart_data: {
-                labels: this.graph_years,
-                datasets: [{
-                    label: 'CPI',
-                    data: this.graph_ranks,
-                    backgroundColor: false,
-                    borderColor: "#00A1B2",
-                    borderWidth: 1.5
-                }]
-            },
-            chart_options:{
-                maintainAspectRatio: false,
-                responsive: true,
-                plugins:{
-                    legend: false
-                },
-                
-            },
+
+
         }
     },
 
@@ -60,14 +47,14 @@ export default {
 
     methods:{
         close_modal(){
-            console.log("closed");
+            this.$emit("close_modal");
         }
     },
 
     computed:{
         graph_years(){
             let years = [];
-            this.country_details.values.forEach(value => {
+            this.country_details.properties.values.forEach(value => {
                 years.push(value[1]);
             });
             return years;
@@ -75,10 +62,16 @@ export default {
 
         graph_ranks(){
             let ranks = [];
-            this.country_details.values.forEach(value => {
+            this.country_details.properties.values.forEach(value => {
                 ranks.push(value[0]);
             });
             return ranks;
+        },
+    },
+
+    watch:{
+        "country_details"(){
+            console.log("changed");
         }
     }
 }

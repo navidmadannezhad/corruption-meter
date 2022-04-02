@@ -6,7 +6,7 @@
 
         <l-tile-layer url="https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmF2aWRtbnpoMTExIiwiYSI6ImNsMTdsYTRsNzE1bHgzZGthMWppNTdscTkifQ.cimHgKp_fzMY5v5roiDaOA"></l-tile-layer>
         <l-geo-json :geojson="geojson" :options="geoJSON_options"></l-geo-json>
-        <Detail_modal :country_details="details" v-if="details"/>
+        <Detail_modal :country_details="details" v-if="details" @close_modal="close_modal"/>
 
       </l-map>
     </client-only>
@@ -85,6 +85,10 @@ export default {
 
       })
     },
+
+    close_modal(){
+      this.details = null;
+    }
 
   },
 
