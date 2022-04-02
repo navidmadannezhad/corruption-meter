@@ -1,9 +1,11 @@
 {
     "version": 3,
-    "mappings": "ACAA,AAAA,CAAC,CAAA;EACG,OAAO,EAAE,GAAG;EACZ,MAAM,EAAE,GAAG;EACX,UAAU,EAAE,UAAU;CACzB",
+    "mappings": "ACAA,AAAA,CAAC,CAAA;EACG,OAAO,EAAE,GAAG;EACZ,MAAM,EAAE,GAAG;EACX,UAAU,EAAE,UAAU;CACzB;;AEID,UAAU;EACT,WAAW,EAAE,SAAS;EACtB,GAAG,EAAE,uCAAuC,CAAC,aAAa;;;AAK3D,AAAA,CAAC,CAAA;EACG,WAAW,EAAE,UAAU;CAC1B",
     "sources": [
         "main.scss",
-        "_normalizer.scss"
+        "_normalizer.scss",
+        "shortcuts/_flex.scss",
+        "shortcuts/_fonts.scss"
     ],
     "names": [],
     "file": "main.css"

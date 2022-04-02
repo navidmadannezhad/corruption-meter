@@ -12,12 +12,10 @@ const store = () => new Vuex.Store({
 
     mutations: {
         SET_CORRUPTION_DATA(state, data){
-            console.log("mut1 working");
             state.corruption_data = data;
         },
 
         SET_GEOJSON_DATA(state, data){
-            console.log("mut2 working");
             state.geoJSON_data = data;
         }
     },

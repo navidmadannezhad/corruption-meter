@@ -1,0 +1,18 @@
+$font1: 3rem;
+$font2: 2.5rem;
+$font3: 2rem;
+$font4: 1.5rem;
+$font5: 1rem;
+$font6: 0.8rem;
+$font7: 0.6rem;
+
+@font-face {
+	font-family: "raleway";
+	src: url('~static/fonts/Raleway-Medium.ttf') format("ttf");
+}
+
+$font_name: "raleway";
+
+*{
+    font-family: sans-serif;
+}

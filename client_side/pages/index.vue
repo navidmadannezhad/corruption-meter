@@ -1,9 +1,13 @@
 <template>
   <div id="map-wrap" style="height: 100vh">
+
     <client-only>
-      <l-map :zoom=13 :center="[55.9464418,8.1277591]" :options="options">
+      <l-map :zoom=13 :center="[55.9464418,8.1277591]" :options="options" ref="map">
+
         <l-tile-layer url="https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmF2aWRtbnpoMTExIiwiYSI6ImNsMTdsYTRsNzE1bHgzZGthMWppNTdscTkifQ.cimHgKp_fzMY5v5roiDaOA"></l-tile-layer>
-        <l-geo-json :geojson="geojson" :options-style="style"></l-geo-json>
+        <l-geo-json :geojson="geojson" :options="geoJSON_options"></l-geo-json>
+        <Detail_modal :country_details="details" v-if="details"/>
+
       </l-map>
     </client-only>
 </div>
@@ -13,9 +17,15 @@
 import axios from "axios";
 import fill_color from "@/utils/style";
 import { modified_geoJSON } from "@/utils/shortcuts";
+import Detail_modal from '~/components/detail_modal.vue';
 
 export default {
   name: 'IndexPage',
+
+  components:{
+    Detail_modal
+  },
+
   data: function(){
     return {
       options: {
@@ -29,18 +39,18 @@ export default {
         maxZoom: 5,
       },
 
-      geojson: null
+      geojson: null,
+      details: null
     }
   },
 
-  methods: {
+  methods:{
     get_data(){
       axios.all([this.get_geoJSON_data(), this.get_corruption_data()])
 
       .then(axios.spread(
         (res1, res2) => {
           this.geojson = modified_geoJSON(this.$store.state.corruption_data, this.$store.state.geoJSON_data);
-          console.log(this.geojson);
         }
       ))
       
@@ -76,17 +86,32 @@ export default {
       })
     },
 
-    style(feature){
-        let rank = feature.properties.rank;
-        return {
-            fillColor: fill_color(rank),
-            opacity: 0.6,
-            color: fill_color(rank),
-            fillOpacity: 0.3
+  },
+
+  computed:{
+    geoJSON_options(){
+      let self = this; 
+      return {
+        style(feature){
+          let rank = feature.properties.rank;
+          return {
+              fillColor: fill_color(rank),
+              opacity: 0.6,
+              color: fill_color(rank),
+              fillOpacity: 0.3
+          }
+      },
+
+        onEachFeature(feature, layer){
+        
+          layer.on({
+              click: (e) => {
+                self.details = e.target.feature;
+              }
+          });
         }
+      }
     }
-    // give ranks to geoJSON countries
-    // initialize :geoJSON and :style
   },
 
   mounted(){

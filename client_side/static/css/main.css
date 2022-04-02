@@ -4,4 +4,13 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
+
+@font-face {
+  font-family: "raleway";
+  src: url("~static/fonts/Raleway-Medium.ttf") format("ttf");
+}
+
+* {
+  font-family: sans-serif;
+}
 /*# sourceMappingURL=main.css.map */

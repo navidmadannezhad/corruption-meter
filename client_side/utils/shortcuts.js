@@ -8,7 +8,9 @@ const modified_geoJSON = (corruption_data, geoJSON_data) => {
     new_geoJSON.features.forEach(country => {
         corruption_data.forEach(data => {
             if(country.properties.ADMIN == data.name){
-                country.properties.rank = data.rank
+                country.properties.rank = data.rank;
+                country.properties.values = data.values;
+                country.properties.link = data.link;
             }
         })
     })
