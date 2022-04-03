@@ -24,6 +24,7 @@ def get_corruption_data():
         
         item = {
             "name": row.find_all("td")[1].find("a").text,
+            "flag": row.find_all("td")[1].find("span").find("img").get("src"),
             "rank": row.find_all("td")[0].text,
             "link": "https://en.wikipedia.org"+row.find_all("td")[1].find("a").get("href"),
             "values":values

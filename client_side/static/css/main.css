@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
 * {
   padding: 0px;
   margin: 0px;
@@ -5,12 +6,7 @@
           box-sizing: border-box;
 }
 
-@font-face {
-  font-family: "raleway";
-  src: url("~static/fonts/Raleway-Medium.ttf") format("ttf");
-}
-
 * {
-  font-family: sans-serif;
+  font-family: Raleway;
 }
 /*# sourceMappingURL=main.css.map */

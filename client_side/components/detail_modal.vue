@@ -1,8 +1,5 @@
 <template>
     <div id="detail-modal">
-        <p class="introduction">
-            Corruption-Meter!
-        </p>
         <div class="detail-modal-content" v-if="country_details">
             <div class="country-name">{{ country_details.properties.ADMIN }}</div>
             <div class="main-details">
@@ -92,37 +89,18 @@ export default {
 
 <style lang="scss" scoped>
 div#detail-modal{
-    @include flex_column_start_center();
-    background-color: #0e0e0e;
-
-    p.introduction{
-        font-size: $font6;
-        @include flex_center_center();
-        color: white;
-
-        letter-spacing: 4px;
-        width: 60%;
-
-        margin-top: 30px;
-        padding: 10px 0px;
-
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-        border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    box-shadow: 1px 0px 5px rgba(0,0,0,0.1);
-
     & > div{
         width: 100%;
-        height: 95vh;
         color: white;
     }
+
     div.select-country{
         @include flex_center_center();
         p{
             font-size: $font3;
             text-align: center;
             width: 80%;
+            margin-top: 40px;
         }
     }
 

@@ -11,6 +11,7 @@ const modified_geoJSON = (corruption_data, geoJSON_data) => {
                 country.properties.rank = data.rank;
                 country.properties.values = data.values;
                 country.properties.link = data.link;
+                country.properties.image = data.link;
             }
         })
     })

@@ -1,8 +1,18 @@
 <template>
   <div class="main">
-    <Detail_modal :country_details="details" @close_modal="close_modal" style="height: 100vh; width: 25vw;"/>
-    <div id="map-wrap" style="height: 100vh; width: 75vw;">
 
+    <div class="sidebar">
+      <p class="introduction">
+          Corruption-Meter!
+      </p>
+
+      <Detail_modal :country_details="details" @close_modal="close_modal" style="height: 100vh; width: 25vw;"/>
+
+      <Records :countries="geojson.features" v-if="geojson"/>
+    </div>
+
+
+    <div id="map-wrap" style="height: 100vh; width: 75vw;">
       <client-only>
         <l-map :zoom=13 :center="[55.9464418,8.1277591]" :options="options" ref="map">
 
@@ -20,12 +30,14 @@ import axios from "axios";
 import { fill_color } from "@/utils/style";
 import { modified_geoJSON } from "@/utils/shortcuts";
 import Detail_modal from '~/components/detail_modal.vue';
+import Records from '~/components/records.vue';
 
 export default {
   name: 'IndexPage',
 
   components:{
-    Detail_modal
+    Detail_modal,
+    Records
   },
 
   data: function(){
@@ -129,6 +141,27 @@ export default {
 
 <style lang="scss" scoped>
 div.main{
-  @include flex_row_between_center();
+  @include flex_row_between_start();
+
+  div.sidebar{
+    height: 100vh;
+    @include flex_column_start_center();
+    background-color: #0e0e0e;
+
+     p.introduction{
+        font-size: $font6;
+        @include flex_center_center();
+        color: white;
+
+        letter-spacing: 4px;
+        width: 60%;
+
+        margin-top: 30px;
+        padding: 10px 0px;
+
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+  }
 }
 </style>

@@ -19,6 +19,12 @@
     align-items: center;
 }
 
+@mixin flex_row_between_start{
+    @include flex_row();
+    justify-content: space-between;
+    align-items: start;
+}
+
 @mixin flex_column_start_center{
     @include flex_column();
     justify-content: flex-start;
