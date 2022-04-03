@@ -10,7 +10,7 @@
             </div>
             <div class="graph-details">
                 <p>Corruption index change in last 10 years</p>
-                <line-chart style="margin: 30px 0px;" height="200px" width="100%" :years="graph_years" :ranks="graph_ranks"/>
+                <line-chart style="margin: 30px 0px;" :height="200" :width="100" :years="graph_years" :ranks="graph_ranks"/>
             </div>
         </div> 
         <div class="select-country" v-else>
@@ -38,7 +38,7 @@ export default {
 
     data(){
         return{
-            change_key: true
+
         }
     },
 
@@ -79,16 +79,15 @@ export default {
     },
 
     watch:{
-        "country_details"(){
-            this.change_key = false;
-            this.change_key = true;
-        }
+
     }
 }
 </script>
 
 <style lang="scss" scoped>
 div#detail-modal{
+    width: 100%;
+
     & > div{
         width: 100%;
         color: white;

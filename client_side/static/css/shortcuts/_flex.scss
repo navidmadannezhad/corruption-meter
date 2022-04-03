@@ -19,10 +19,16 @@
     align-items: center;
 }
 
+@mixin flex_row_start_center{
+    @include flex_row();
+    justify-content: flex-start;
+    align-items: center;
+}
+
 @mixin flex_row_between_start{
     @include flex_row();
     justify-content: space-between;
-    align-items: start;
+    align-items: flex-start;
 }
 
 @mixin flex_column_start_center{
